@@ -1,0 +1,15 @@
+{
+  "name": "staff-pages",
+  "version": "0.0.0",
+  "description": "Renders blank music staffs for printing",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx browser-sync . -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timothy Morey <timmorey@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.11"
+  }
+}

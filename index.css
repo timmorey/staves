@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+body, body * {
+  box-sizing: border-box;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  padding: 16px;
+  width: 8.5in;
+  height: 11in;
+}
