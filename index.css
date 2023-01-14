@@ -13,3 +13,18 @@ canvas {
   width: 6.5in;
   height: 9in;
 }
+
+#control-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, .8);
+  border: 1px solid rgba(220, 220, 220, 1);
+}
+
+@media print {
+  #control-overlay {
+    display: none;
+  }
+}

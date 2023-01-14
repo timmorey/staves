@@ -1,12 +1,10 @@
-const LINE_SPACING = 10
-const STAFF_SPACING = 36
-const GROUP_SPACING = 54
+const STYLE_STORAGE_KEY = 'staff-pages-line-style'
 
 function getCanvas() {
   return document.querySelector('#the-canvas')
 }
 
-function render(canvas) {
+function render(canvas, lineStyle) {
   canvas.width = canvas.clientWidth * window.devicePixelRatio
   canvas.height = canvas.clientHeight * window.devicePixelRatio
   const context = canvas.getContext('2d')
@@ -17,17 +15,24 @@ function render(canvas) {
   context.strokeStyle = 'black'
 
   let y = 1
-  for (let groups = 0; groups < 5; groups++) {
-    y = drawGroup(context, y)
-    y += GROUP_SPACING
+  if (lineStyle === 'staff') {
+    for (let groups = 0; groups < 9; groups++) {
+      y = drawStaff(context, y, 10)
+      y += 62
+    }
+  } else if (lineStyle === 'tab') {
+    for (let groups = 0; groups < 8; groups++) {
+      y = drawTabLines(context, y, 10)
+      y += 64
+    }
+  } else if (lineStyle === 'staff-and-tab') {
+    for (let groups = 0; groups < 5; groups++) {
+      y = drawStaff(context, y, 10)
+      y += 34
+      y = drawTabLines(context, y, 10)
+      y += 60
+    }
   }
-}
-
-function drawGroup(context, y) {
-  y = drawStaff(context, y, LINE_SPACING)
-  y += STAFF_SPACING
-  y = drawTabLines(context, y, LINE_SPACING)
-  return y
 }
 
 function drawStaff(context, y, spacing) {
@@ -41,7 +46,7 @@ function drawStaff(context, y, spacing) {
 
 function drawTabLines(context, y, spacing) {
   y = drawLine(context, y)
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     y += spacing
     y = drawLine(context, y)
   }
@@ -56,8 +61,33 @@ function drawLine(context, y) {
   return y
 }
 
+function getSelectElement() {
+  return document.querySelector('#style-select')
+}
+
+function getSelectedLineStyle() {
+  return getSelectElement().value
+}
+
+function hydrateFromLocalStorage() {
+  if (window.localStorage.getItem(STYLE_STORAGE_KEY)) {
+    getSelectElement().value = window.localStorage.getItem(STYLE_STORAGE_KEY)
+  }
+}
+
+function saveToLocalStorage(lineStyle) {
+  window.localStorage.setItem(STYLE_STORAGE_KEY, lineStyle)
+}
+
 window.addEventListener('load', () => {
+  hydrateFromLocalStorage()
+  let lineStyle = getSelectedLineStyle()
   const canvasElement = getCanvas()
-  render(canvasElement)
-  window.addEventListener('resize', () => render(canvasElement))
+  render(canvasElement, lineStyle)
+  window.addEventListener('resize', () => render(canvasElement, lineStyle))
+  getSelectElement().addEventListener('input', () => {
+    lineStyle = getSelectedLineStyle()
+    saveToLocalStorage(lineStyle)
+    render(canvasElement, lineStyle)
+  })
 })
