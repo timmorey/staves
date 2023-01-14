@@ -8,8 +8,8 @@ body, body * {
 
 canvas {
   display: block;
-  margin: auto;
-  padding: 16px;
-  width: 8.5in;
-  height: 11in;
+  margin-block: 1in;
+  margin-inline: auto;
+  width: 6.5in;
+  height: 9in;
 }
