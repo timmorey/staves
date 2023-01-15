@@ -16,25 +16,19 @@ function render() {
   context.strokeStyle = 'black'
 
   let y = 1
-  if (lineStyle() === 'staff') {
-    for (let groups = 0; groups < 9; groups++) {
+  while (y < canvas.height) {
+    if (lineStyle() === 'staff') {
       y = drawStaff(context, y, lineSpacing())
       y += groupSpacing()
-    }
-  } else if (lineStyle() === 'double-staff') {
-    for (let groups = 0; groups < 5; groups++) {
+    } else if (lineStyle() === 'double-staff') {
       y = drawStaff(context, y, lineSpacing())
       y += intragroupSpacing()
       y = drawStaff(context, y, lineSpacing())
       y += groupSpacing()
-    }
-  } else if (lineStyle() === 'tab') {
-    for (let groups = 0; groups < 8; groups++) {
+    } else if (lineStyle() === 'tab') {
       y = drawTabLines(context, y, lineSpacing())
       y += groupSpacing()
-    }
-  } else if (lineStyle() === 'staff-and-tab') {
-    for (let groups = 0; groups < 5; groups++) {
+    } else if (lineStyle() === 'staff-and-tab') {
       y = drawStaff(context, y, lineSpacing())
       y += intragroupSpacing()
       y = drawTabLines(context, y, lineSpacing())
