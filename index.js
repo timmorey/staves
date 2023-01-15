@@ -25,7 +25,7 @@ function render() {
   } else if (lineStyle() === 'staff-and-tab') {
     for (let groups = 0; groups < 5; groups++) {
       y = drawStaff(context, y, lineSpacing())
-      y += staffSpacing()
+      y += intragroupSpacing()
       y = drawTabLines(context, y, lineSpacing())
       y += groupSpacing()
     }
@@ -86,16 +86,16 @@ function setLineSpacing(spacing) {
   lineSpacingInputElement().value = spacing
 }
 
-function staffSpacingInputElement() {
-  return document.querySelector('#staff-spacing-input')
+function intragroupSpacingInputElement() {
+  return document.querySelector('#intragroup-spacing-input')
 }
 
-function staffSpacing() {
-  return parseInt(staffSpacingInputElement().value)
+function intragroupSpacing() {
+  return parseInt(intragroupSpacingInputElement().value)
 }
 
-function setStaffSpacing(spacing) {
-  staffSpacingInputElement().value = spacing
+function setIntragroupSpacing(spacing) {
+  intragroupSpacingInputElement().value = spacing
 }
 
 function groupSpacingInputElement() {
@@ -113,14 +113,14 @@ function setGroupSpacing(spacing) {
 function hydrateControls() {
   setLineStyle(window.localStorage.getItem(`${STORAGE_KEY_BASE}-line-style`) ?? 'staff-and-tab')
   setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? 10)
-  setStaffSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-staff-spacing`) ?? 34)
+  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? 34)
   setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? 60)
 }
 
 function saveToLocalStorage() {
   window.localStorage.setItem(`${STORAGE_KEY_BASE}-line-style`, lineStyle())
   window.localStorage.setItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`, lineSpacing())
-  window.localStorage.setItem(`${STORAGE_KEY_BASE}-${lineStyle()}-staff-spacing`, staffSpacing())
+  window.localStorage.setItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`, intragroupSpacing())
   window.localStorage.setItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`, groupSpacing())
 }
 
@@ -131,7 +131,7 @@ function handleInput() {
 
 function handleStyleChange() {
   setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? 10)
-  setStaffSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-staff-spacing`) ?? 34)
+  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? 34)
   setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? 60)
   saveToLocalStorage()
   render()
@@ -143,6 +143,6 @@ window.addEventListener('load', () => {
   window.addEventListener('resize', render)
   selectElement().addEventListener('input', handleStyleChange)
   lineSpacingInputElement().addEventListener('input', handleInput)
-  staffSpacingInputElement().addEventListener('input', handleInput)
+  intragroupSpacingInputElement().addEventListener('input', handleInput)
   groupSpacingInputElement().addEventListener('input', handleInput)
 })
