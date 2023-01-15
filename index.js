@@ -86,6 +86,10 @@ function setLineSpacing(spacing) {
   lineSpacingInputElement().value = spacing
 }
 
+function intragroupSpacingLabelElement() {
+  return document.querySelector('#intragroup-spacing-label')
+}
+
 function intragroupSpacingInputElement() {
   return document.querySelector('#intragroup-spacing-input')
 }
@@ -130,6 +134,11 @@ function handleInput() {
 }
 
 function handleStyleChange() {
+  if (lineStyle() === 'staff-and-tab') {
+    intragroupSpacingLabelElement().classList.remove('hidden')
+  } else {
+    intragroupSpacingLabelElement().classList.add('hidden')
+  }
   setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? 10)
   setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? 34)
   setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? 60)

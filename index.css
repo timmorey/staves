@@ -33,3 +33,7 @@ canvas {
     display: none;
   }
 }
+
+.hidden {
+  display: none
+}
