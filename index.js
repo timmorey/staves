@@ -3,6 +3,9 @@ const CANVAS_DPI = 300
 const CANVAS_SCALED_DPI = 72
 const CANVAS_WIDTH_INCHES = 6.5
 const CANVAS_HEIGHT_INCHES = 9
+const DEFAULT_LINE_SPACING = 8
+const DEFAULT_GROUP_SPACING = 64
+const DEFAULT_INTRAGROUP_SPACING = 36
 
 function render() {
   const canvas = canvasElement()
@@ -121,9 +124,9 @@ function setGroupSpacing(spacing) {
 
 function hydrateControls() {
   setLineStyle(window.localStorage.getItem(`${STORAGE_KEY_BASE}-line-style`) ?? 'staff-and-tab')
-  setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? 10)
-  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? 34)
-  setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? 60)
+  setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? DEFAULT_LINE_SPACING)
+  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? DEFAULT_INTRAGROUP_SPACING)
+  setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? DEFAULT_GROUP_SPACING)
 }
 
 function saveToLocalStorage() {
@@ -144,9 +147,9 @@ function handleStyleChange() {
   } else {
     intragroupSpacingLabelElement().classList.add('hidden')
   }
-  setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? 10)
-  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? 34)
-  setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? 60)
+  setLineSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-line-spacing`) ?? DEFAULT_LINE_SPACING)
+  setIntragroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-intragroup-spacing`) ?? DEFAULT_INTRAGROUP_SPACING)
+  setGroupSpacing(window.localStorage.getItem(`${STORAGE_KEY_BASE}-${lineStyle()}-group-spacing`) ?? DEFAULT_GROUP_SPACING)
   saveToLocalStorage()
   render()
 }
