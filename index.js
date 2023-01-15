@@ -1,11 +1,15 @@
 const STORAGE_KEY_BASE = 'staff-pages'
+const CANVAS_DPI = 300
+const CANVAS_SCALED_DPI = 72
+const CANVAS_WIDTH_INCHES = 6.5
+const CANVAS_HEIGHT_INCHES = 9
 
 function render() {
   const canvas = canvasElement()
-  canvas.width = canvas.clientWidth * window.devicePixelRatio
-  canvas.height = canvas.clientHeight * window.devicePixelRatio
+  canvas.width = CANVAS_WIDTH_INCHES * CANVAS_DPI
+  canvas.height = CANVAS_HEIGHT_INCHES * CANVAS_DPI
   const context = canvas.getContext('2d')
-  context.scale(window.devicePixelRatio, window.devicePixelRatio)
+  context.scale(CANVAS_DPI / CANVAS_SCALED_DPI, CANVAS_DPI / CANVAS_SCALED_DPI,)
   context.clearRect(0, 0, canvas.width, canvas.height)
 
   context.lineWidth = 1
