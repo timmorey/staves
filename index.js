@@ -17,6 +17,13 @@ function render() {
       y = drawStaff(context, y, lineSpacing())
       y += groupSpacing()
     }
+  } else if (lineStyle() === 'double-staff') {
+    for (let groups = 0; groups < 5; groups++) {
+      y = drawStaff(context, y, lineSpacing())
+      y += intragroupSpacing()
+      y = drawStaff(context, y, lineSpacing())
+      y += groupSpacing()
+    }
   } else if (lineStyle() === 'tab') {
     for (let groups = 0; groups < 8; groups++) {
       y = drawTabLines(context, y, lineSpacing())
@@ -134,7 +141,7 @@ function handleInput() {
 }
 
 function handleStyleChange() {
-  if (lineStyle() === 'staff-and-tab') {
+  if (lineStyle() === 'staff-and-tab' || lineStyle() === 'double-staff') {
     intragroupSpacingLabelElement().classList.remove('hidden')
   } else {
     intragroupSpacingLabelElement().classList.add('hidden')
