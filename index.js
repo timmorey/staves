@@ -1,4 +1,4 @@
-const STORAGE_KEY_BASE = 'staff-pages'
+const STORAGE_KEY_BASE = 'staves'
 const CANVAS_DPI = 300
 const CANVAS_SCALED_DPI = 72
 const CANVAS_WIDTH_INCHES = 6.5

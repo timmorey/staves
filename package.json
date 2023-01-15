@@ -1,7 +1,7 @@
 {
-  "name": "staff-pages",
+  "name": "staves",
   "version": "0.0.0",
-  "description": "Renders blank music staffs for printing",
+  "description": "Renders blank sheet music pages for printing",
   "main": "index.js",
   "scripts": {
     "start": "npx browser-sync . -w",
